@@ -6,6 +6,23 @@ body{
 
 }
 
+section{
+    text-align: center;
+    
+}
+button{
+    background-color: #df0000;
+    width: 80px;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+input{
+    padding: 4px;
+    border-radius: 4px;
+}
+
 header{
     text-align: center;
 }
@@ -18,6 +35,11 @@ image{
     display : grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+}
+
+
+.button{
+    margin-bottom: 8px;
 }
 
 .pokemon-card{
@@ -104,4 +126,20 @@ image{
     color: rgb(239, 224, 93);
     font-style: normal;
     font-size: 14px;
+}
+.rename-Button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #746287;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
 }
