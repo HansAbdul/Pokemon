@@ -61,6 +61,26 @@ function displayTeam() {
     team.forEach((pokemon, index) => {
         const pokemonCard = document.createElement("div");
         pokemonCard.className = "pokemon-card";
+
+        //rename button
+        
+        const renameButton = document.createElement("button");
+        renameButton.textContent = "✏️";
+        renameButton.className = "rename-Button";
+
+        pokemonCard.appendChild(renameButton);
+        renameButton.addEventListener("click", () => {
+            const newName = prompt("Enter new name");
+            if(newName) pokemon.name = newName;
+                localStorage.setItem("team", JSON.stringify(team));
+                displayTeam();
+
+        });
+
+
+
+
+
         const pokemonName = document.createElement("p");
         const Image = document.createElement("img");
 
@@ -116,6 +136,10 @@ function displayTeam() {
             team.splice(index, 1);
             localStorage.setItem("team", JSON.stringify(team));
             displayTeam();
+
+        
+
+        
         });
     });
 }
