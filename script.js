@@ -58,18 +58,73 @@ function searchPokemon() {
 function displayTeam() {
 
     teamDiv.textContent = "";
-    team.forEach(pokemon => {
+    team.forEach((pokemon, index) => {
         const pokemonCard = document.createElement("div");
+        pokemonCard.className = "pokemon-card";
         const pokemonName = document.createElement("p");
         const Image = document.createElement("img");
-        Image.width= 250;
+
+        // pokemon stats
+        const statsPanel = document.createElement("p");
+        statsPanel.className = "stats";
+
+        pokemon.stats.forEach(s => {
+    const statRow = document.createElement("div");
+    statRow.className = "stat-row";
+
+    const statName = document.createElement("span");
+    statName.className = "stat-name";
+    statName.textContent = s.stat.name;
+
+    const statValue = document.createElement("span");
+    statValue.textContent = s.base_stat;
+
+    const statBar = document.createElement("div");
+    statBar.className = "stat-bar";
+
+    const statFill = document.createElement("div");
+    statFill.className = "stat-fill";
+
+    statFill.style.width = `${(s.base_stat / 255) * 100}%`;
+
+    statBar.appendChild(statFill);
+
+    statRow.appendChild(statName);
+    statRow.appendChild(statValue);
+    statRow.appendChild(statBar);
+
+    statsPanel.appendChild(statRow);
+});
+
+        pokemonCard.appendChild(statsPanel);
+        
+        Image.width= 180;
+
         Image.src = pokemon.sprites.front_default;
         pokemonCard.appendChild(Image);
         pokemonName.textContent = pokemon.name;
         pokemonCard.appendChild(pokemonName);
         teamDiv.appendChild(pokemonCard);
+
+        //remove button here
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        pokemonCard.appendChild(removeButton);
+        removeButton.className = "remove";
+        removeButton.addEventListener("click", () => {
+            team.splice(index, 1);
+            localStorage.setItem("team", JSON.stringify(team));
+            displayTeam();
+        });
     });
 }
+
+
+// display stats
+
+
+
 
 
 // Press enter than have to physically press the search button
@@ -79,4 +134,3 @@ searchInput.addEventListener("keydown", function (event) {
         searchPokemon();
     }
 });
-
