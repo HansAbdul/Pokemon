@@ -18,7 +18,12 @@ function searchPokemon() {
             resultDiv.textContent = data.name;
             const Image = document.createElement("img");
             Image.src = data.sprites.front_default;
-            AppendImage = resultDiv.appendChild(Image);
+            resultDiv.appendChild(Image);
+
+            const types = document.createElement("p");
+            types.textContent = data.types.map(t => t.type.name).join(", ");
+            resultDiv.appendChild(types);
+
         })
         .catch(error => {
             console.log(error);
@@ -26,6 +31,7 @@ function searchPokemon() {
         });
 }
 
+// Press enter than have to physically press the search button
 searchBtn.addEventListener("click", searchPokemon);
 searchInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
