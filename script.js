@@ -7,7 +7,8 @@ let team = JSON.parse(localStorage.getItem("team")) || [];
 displayTeam();
 
 function searchPokemon() {
-    const pokemonName = searchInput.value;
+    const pokemonName = searchInput.value.trim().toLowerCase();
+
 
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
         .then((response) => {
