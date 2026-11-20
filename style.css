@@ -230,7 +230,7 @@ image{
         font-size: 9px;
     }
 }
-/* Mediumish devices like iphone 17s */
+/*  devices like iphone 17s */
 @media (min-width: 416px) and (max-width: 820px) {
     body {
         margin: 0 24px;
