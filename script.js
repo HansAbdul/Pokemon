@@ -3,21 +3,20 @@ const searchInput = document.getElementById("pokemon-search-button");
 const resultDiv = document.getElementById("Pokemonresult");
 const teamDiv = document.getElementById("Team");
 
-
-
 let team = JSON.parse(localStorage.getItem("team")) || [];
 displayTeam();
 
 function searchPokemon() {
     const pokemonName = searchInput.value;
+
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
                 throw new Error("Pokemon not found");
             }
             return response.json();
         })
-        .then(data => {
+        .then((data) => {
             console.log(data);
             resultDiv.textContent = data.name;
 
@@ -25,134 +24,116 @@ function searchPokemon() {
             const addButton = document.createElement("button");
             addButton.textContent = "Add to Team";
             resultDiv.appendChild(addButton);
+
             addButton.addEventListener("click", () => {
-                if(team.length >= 6) {
+                if (team.length >= 6) {
                     alert("Team is full");
-                }
-                else {
-                team.push(data);
-                localStorage.setItem("team", JSON.stringify(team));
-                console.log(team);
-                displayTeam();
+                } else {
+                    team.push(data);
+                    localStorage.setItem("team", JSON.stringify(team));
+                    console.log(team);
+                    displayTeam();
                 }
             });
 
-
             const Image = document.createElement("img");
-            Image.width= 250;
+            Image.width = 250;
             Image.src = data.sprites.front_default;
             resultDiv.appendChild(Image);
 
             const types = document.createElement("p");
             types.style.color = "white";
-            types.textContent = data.types.map(t => t.type.name).join(", ");
+            types.textContent = data.types.map((t) => t.type.name).join(", ");
             resultDiv.appendChild(types);
-
         })
-        .catch(error => {
+        .catch((error) => {
             console.log(error);
             resultDiv.textContent = "Pokemon not found, try again";
         });
 }
 
 function displayTeam() {
-
     teamDiv.textContent = "";
+
     team.forEach((pokemon, index) => {
         const pokemonCard = document.createElement("div");
         pokemonCard.className = "pokemon-card";
 
-        //rename button
-        
+        // Rename button
         const renameButton = document.createElement("button");
         renameButton.textContent = "✏️";
         renameButton.className = "rename-Button";
-
         pokemonCard.appendChild(renameButton);
+
         renameButton.addEventListener("click", () => {
             const newName = prompt("Enter new name");
-            if(newName) pokemon.name = newName;
-                localStorage.setItem("team", JSON.stringify(team));
-                displayTeam();
+            if (newName) pokemon.name = newName;
 
+            localStorage.setItem("team", JSON.stringify(team));
+            displayTeam();
         });
-
-
-
-
 
         const pokemonName = document.createElement("p");
         const Image = document.createElement("img");
 
-        // pokemon stats
+        // Pokemon stats
         const statsPanel = document.createElement("p");
         statsPanel.className = "stats";
 
-        pokemon.stats.forEach(s => {
-    const statRow = document.createElement("div");
-    statRow.className = "stat-row";
+        pokemon.stats.forEach((s) => {
+            const statRow = document.createElement("div");
+            statRow.className = "stat-row";
 
-    const statName = document.createElement("span");
-    statName.className = "stat-name";
-    statName.textContent = s.stat.name;
+            const statName = document.createElement("span");
+            statName.className = "stat-name";
+            statName.textContent = s.stat.name;
 
-    const statValue = document.createElement("span");
-    statValue.textContent = s.base_stat;
+            const statValue = document.createElement("span");
+            statValue.textContent = s.base_stat;
 
-    const statBar = document.createElement("div");
-    statBar.className = "stat-bar";
+            const statBar = document.createElement("div");
+            statBar.className = "stat-bar";
 
-    const statFill = document.createElement("div");
-    statFill.className = "stat-fill";
+            const statFill = document.createElement("div");
+            statFill.className = "stat-fill";
+            statFill.style.width = `${(s.base_stat / 255) * 100}%`;
+            statBar.appendChild(statFill);
 
-    statFill.style.width = `${(s.base_stat / 255) * 100}%`;
+            statRow.appendChild(statName);
+            statRow.appendChild(statValue);
+            statRow.appendChild(statBar);
 
-    statBar.appendChild(statFill);
-
-    statRow.appendChild(statName);
-    statRow.appendChild(statValue);
-    statRow.appendChild(statBar);
-
-    statsPanel.appendChild(statRow);
-});
+            statsPanel.appendChild(statRow);
+        });
 
         pokemonCard.appendChild(statsPanel);
-        
-        Image.width= 180;
 
+        // Pokemon image and name
+        Image.width = 180;
         Image.src = pokemon.sprites.front_default;
         pokemonCard.appendChild(Image);
+
         pokemonName.textContent = pokemon.name;
         pokemonCard.appendChild(pokemonName);
         teamDiv.appendChild(pokemonCard);
 
-        //remove button here
-
+        // Remove button
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
-        pokemonCard.appendChild(removeButton);
         removeButton.className = "remove";
+        pokemonCard.appendChild(removeButton);
+
         removeButton.addEventListener("click", () => {
             team.splice(index, 1);
             localStorage.setItem("team", JSON.stringify(team));
             displayTeam();
-
-        
-
-        
         });
     });
 }
 
-
-// display stats
-
-
-
-
-
-// Press enter than have to physically press the search button
+// Search on click or when Enter is pressed
 searchBtn.addEventListener("click", searchPokemon);
+
 searchInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         searchPokemon();
