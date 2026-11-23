@@ -61,21 +61,20 @@ function displayTeam() {
         pokemonCard.className = "pokemon-card";
 
         // Rename button
-        const renamebutton = document.createElement("button");
-        renamebutton.textContent = "✏️";
-        renamebutton.className = "rename-button";
-        renamebutton.setAttribute("aria-label", `Rename ${pokemon.name}`);
-        renamebutton.title = "Rename";
-        pokemonCard.appendChild(renamebutton);
+        const renameButton = document.createElement("button");
+        renameButton.textContent = "✏️";
+        renameButton.className = "rename-button";
+        renameButton.setAttribute("aria-label", `Rename ${pokemon.nickname || pokemon.name}`);
+        renameButton.title = "Rename";
+        pokemonCard.appendChild(renameButton);
 
-        renamebutton.addEventListener("click", () => {
+        renameButton.addEventListener("click", () => {
             const newName = prompt("Enter new name")?.trim().slice(0, 12);
             if (newName) {
                 pokemon.nickname = newName;
+                localStorage.setItem("team", JSON.stringify(team));
+                displayTeam();
             }
-
-            localStorage.setItem("team", JSON.stringify(team));
-            displayTeam();
         });
 
         const pokemonName = document.createElement("p");
