@@ -10,13 +10,6 @@ section{
     text-align: center;
     
 }
-button{
-    background-color: #df0000;
-    width: 80px;
-    color: white;
-    padding: 4px;
-    border-radius: 4px;
-}
 
 input{
     padding: 4px;
@@ -38,8 +31,35 @@ image{
 }
 
 
-.button{
+.btn {
     margin-bottom: 8px;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-search {
+    background-color: #1e88e5;
+}
+
+.btn-search:hover {
+    background-color: #1565c0;
+}
+
+.btn-add {
+    background-color: #43a047;
+}
+
+.btn-add:hover {
+    background-color: #2e7d32;
 }
 
 .pokemon-card{
@@ -55,22 +75,11 @@ image{
 
 .remove {
     margin-top: 8px;
-    padding: 6px 16px;
-    border: none;
-    border-radius: 20px;
-    color: white;
     background-color: #e53935;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
 }
 
 .remove:hover {
     background-color: #b71c1c;
-}
-
-.remove:active {
-    transform: scale(0.95);
 }
 
 .pokemon-card {
@@ -127,7 +136,7 @@ image{
     font-style: normal;
     font-size: 14px;
 }
-.rename-Button {
+.rename-button {
     position: absolute;
     top: 6px;
     right: 6px;
@@ -141,5 +150,5 @@ image{
     line-height: 32px;
     text-align: center;
     cursor: pointer;
-    z-index: 2;
+    z-index: 3;
 }

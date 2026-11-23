@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Pokemon</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Pokemon</title>
+    </head>
 
-</head>
-<body>
-    <header> 
-        <image>
-            <img src="Pokemon.png">
-        </image>
-        <p> Build your ultimate team! </p>
-    </header>
+    <body>
+        <header>
+            
+                <img src="Pokemon.png" alt="Pokemon logo"/>
+            
 
-    <main>
-        <section> 
-            <h2>Search pokemon</h2>
-            <input type ="text" id="pokemon-search-button" placeholder="Enter Pokemon name">
-            <button id="search"> Search </button>
-            <div
-                id="Pokemonresult">
-            </div>
-        </section>
+            <p>Build your ultimate team!</p>
+        </header>
 
-        <section>
-            <h2>Your team</h2>
-            <div
-                id="Team">
-            </div>
-                
-        </section>
-    </main>
-    
+        <main>
+            <section>
+                <h2>Search pokemon</h2>
+                <input
+                    type="text"
+                    id="pokemon-search-button"
+                    placeholder="Enter Pokemon name"
+                />
+                <button id="search" class="btn btn-search">Search</button>
+                <div id="Pokemonresult"></div>
+            </section>
 
+            <section>
+                <h2>Your team</h2>
+                <div id="Team"></div>
+            </section>
+        </main>
 
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
