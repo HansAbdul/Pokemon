@@ -23,9 +23,21 @@
                     type="text"
                     id="pokemon-search-button"
                     placeholder="Enter Pokemon name"
+                    role="combobox"
+                    aria-label="Search Pokemon by name"
+                    aria-autocomplete="list"
+                    aria-expanded="false"
+                    aria-controls="suggestions"
+                    autocomplete="off"
                 />
                 <button id="search" class="btn btn-search">Search</button>
-                <div id="Pokemonresult"></div>
+                <p id="search-status" role="status" aria-live="polite"></p>
+                <button id="retry" class="btn" hidden>Retry</button>
+                <div id="suggest-wrap">
+                <ul id="suggestions" role="listbox" aria-label="Pokemon suggestions" hidden></ul>
+                <div id="preview" hidden></div>
+                </div>
+                <div id="Pokemonresult" aria-live="polite"></div>
             </section>
 
             <section>
